@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 import pandas
 import time
+import json
 
 dataframe = pandas.read_csv('stock-exchange-kse-100pakistan.csv')
 
@@ -48,6 +49,8 @@ if __name__ == '__main__':
                     openstock = stats['Open']
                     print(current_datetime)
                     print("GOT OPENING PRICE: " + openstock)
+                    with open('log.txt','a') as f:
+                        f.write(current_datetime+':'+openstock)
 
         elif ampm == "PM":
 
@@ -69,6 +72,8 @@ if __name__ == '__main__':
                                     'Volume': stats["Volume"]})
                     print("SAVING")
                     print(newdata)
+                    with open('log.txt','a') as f:
+                        f.write(current_datetime+':'+json.dumps(newdata[0]))
                     dataframe = pandas.concat([pandas.DataFrame(newdata), dataframe], ignore_index=True)
                     dataframe.to_csv('stock-exchange-kse-100pakistan.csv', index=False)
 
