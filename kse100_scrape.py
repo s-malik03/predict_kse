@@ -42,7 +42,7 @@ if __name__ == '__main__':
 
         if ampm == "AM":
 
-            if int(current_time[0]) >= 9 and int(current_time[1]) >= 32:
+            if int(current_time[0]) >= 9 and int(current_time[1]) >= 32 and int(current_time[0])<12:
 
                 if openstock is None:
                     stats = getstat(soup)
@@ -54,7 +54,7 @@ if __name__ == '__main__':
 
         elif ampm == "PM":
 
-            if int(current_time[0]) >= 4 and int(current_time[1]) >= 15:
+            if int(current_time[0]) >= 4 and int(current_time[1]) >= 15 and int(current_time[0])<12:
 
                 stats = getstat(soup)
                 close = stats['Open']
