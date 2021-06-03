@@ -33,6 +33,9 @@ if __name__ == '__main__':
         if current_date_str != prev_date:
             openstock = None
             close = None
+            with open('log.txt','a') as f:
+
+                f.write("NEW DATE:" +current_date_str+'\n')
 
         current_time = soup.find('div', class_='topbar__status__label').text
         current_datetime = current_time
@@ -50,7 +53,7 @@ if __name__ == '__main__':
                     print(current_datetime)
                     print("GOT OPENING PRICE: " + openstock)
                     with open('log.txt','a') as f:
-                        f.write(current_datetime+':'+openstock)
+                        f.write(current_datetime+':'+openstock+'\n')
 
         elif ampm == "PM":
 
@@ -73,7 +76,7 @@ if __name__ == '__main__':
                     print("SAVING")
                     print(newdata)
                     with open('log.txt','a') as f:
-                        f.write(current_datetime+':'+json.dumps(newdata[0]))
+                        f.write(current_datetime+':'+json.dumps(newdata[0])+'\n')
                     dataframe = pandas.concat([pandas.DataFrame(newdata), dataframe], ignore_index=True)
                     dataframe.to_csv('stock-exchange-kse-100pakistan.csv', index=False)
 
